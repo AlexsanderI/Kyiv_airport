@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from './header/header';
+import Page from './Page/Page';
 
 const App = () => {
   return (
     <>
       <Header />
+      <Page />
     </>
   );
   // return <div>Hello, React!</div>;

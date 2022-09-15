@@ -1,0 +1,32 @@
+.board__departure-arrivel {
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  width: 1120px;
+  margin: auto;
+  //   max-width: 1120px;
+}
+
+.board__departure {
+  border-radius: 60px 0 0 0;
+  text-align: right;
+  //   margin-right: -60px;
+  background-color: #1eb7ee;
+  width: 100vw;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+
+.board__arrivel {
+  border-radius: 0 60px 0 0;
+  text-align: right;
+  //   margin-right: -60px;
+  background-color: #fff;
+  width: 100vw;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #1eb7ee;
+}
