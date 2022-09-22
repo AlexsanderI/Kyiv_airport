@@ -17,6 +17,7 @@
   font-weight: 700;
   text-align: center;
   color: #fff;
+  cursor: pointer;
 }
 
 .board__arrivel {
@@ -29,4 +30,9 @@
   font-weight: 700;
   text-align: center;
   color: #1eb7ee;
+  cursor: pointer;
+}
+
+button {
+  text-transform: uppercase;
 }
