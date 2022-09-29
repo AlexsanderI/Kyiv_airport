@@ -1,8 +1,8 @@
 import React from 'react';
 import BoardTable from '../table/BoardTable';
 import './date.scss';
-import moment, { calendarFormat } from 'moment';
-import { useState, useEffect } from 'react';
+import moment from 'moment';
+import { useState } from 'react';
 
 const DateBorder = () => {
   let createdDate = moment(new Date()).format();
