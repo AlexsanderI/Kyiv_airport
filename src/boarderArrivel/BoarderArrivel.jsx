@@ -1,7 +1,7 @@
 import React from 'react';
-import './boarder.scss';
+import './boarderArrivel.scss';
 
-const Boarder = () => {
+const BoarderArrivel = () => {
   return (
     <div className="board">
       <div className="board__departure-arrivel">
@@ -16,4 +16,4 @@ const Boarder = () => {
   );
 };
 
-export default Boarder;
+export default BoarderArrivel;

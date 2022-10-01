@@ -4,13 +4,12 @@
   height: 60px;
   width: 1120px;
   margin: auto;
-  //   max-width: 1120px;
 }
 
 .board__departure {
   border-radius: 60px 0 0 0;
+  // z-index: -1;
   text-align: right;
-  //   margin-right: -60px;
   background-color: #1eb7ee;
   width: 100vw;
   font-size: 20px;
@@ -21,9 +20,9 @@
 }
 
 .board__arrivel {
-  border-radius: 0 60px 0 0;
+  border-radius: 60px 60px 0 0;
   text-align: right;
-  //   margin-right: -60px;
+  margin-left: -60px;
   background-color: #fff;
   width: 100vw;
   font-size: 20px;
