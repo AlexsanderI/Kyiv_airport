@@ -1,5 +1,5 @@
 import React from 'react';
-import BoardTable from '../table/BoardTable';
+import FlightBoardTable from '../table/FlightBoardTable';
 import './date.scss';
 import moment from 'moment';
 import { useState } from 'react';
@@ -48,7 +48,7 @@ const DateBorder = () => {
           </div>
         </div>
       </div>
-      <BoardTable />
+      <FlightBoardTable />
     </div>
   );
 };
