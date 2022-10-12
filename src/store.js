@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import tasksReducer from './components/flight.reducer';
 
 const reducer = combineReducers({
-  flites: tasksReducer,
+  flights: tasksReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,29 +1,22 @@
-import { tasksListSelector } from './tasks.selectors';
-import getFlightList from './../FlightsGateway';
+import * as tasksGateway from '../FlightsGateway';
 
-export const FLIGHTS_DATA = 'FLIGHTS_DATA';
+export const TASKS_LIST_RECIEVED = 'TASKS_LIST_RECIEVED';
 
-export const tasksListRecived = flightData => {
+export const tasksListRecived = flightList => {
   const action = {
-    type: FLIGHTS_DATA,
+    type: TASKS_LIST_RECIEVED,
     payload: {
-      flightData,
+      flightList,
     },
   };
   return action;
 };
 
-export const fetchFlightList = () => {
+export const getFlightList = () => {
   const thunkAction = function (dispatch) {
-    getFlightList().then(flightData => dispatch(tasksListRecived(flightData)));
+    tasksGateway.fetchTaskList().then(flightList => {
+      dispatch(tasksListRecived(flightList.body.departure));
+    });
   };
   return thunkAction;
 };
-
-// export const fetchUserDate = userName => {
-//   return function (dispatch) {
-//     getFlightList(userName).then(userData => {
-//       dispatch(userDataRecived(userData));
-//     });
-//   };
-// };

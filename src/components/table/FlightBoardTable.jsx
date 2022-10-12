@@ -1,15 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as flightActions from '../flight.actions';
 import './flightBoardTable.scss';
-import { fliteListSelector } from '../tasks.selectors';
+import { flightSelector } from '../flight.selectors';
+import { array } from 'prop-types';
 
 class FlightBoardTable extends React.Component {
   componentDidMount() {
-    this.props.fetchFlightList();
+    this.props.getFlightList();
   }
+
   render() {
+    const a = this.props.flights.map(flight => flight.ID);
+    console.log(Array.isArray(this.props.flights), a);
     return (
       <table className="styled-table">
         <thead>
@@ -24,12 +28,9 @@ class FlightBoardTable extends React.Component {
         </thead>
         <tbody>
           <tr className="table__sheduel">
-            <td>A</td>
-            <td>1:20</td>
-            <td>Warsaw</td>
-            <td>Landed 1:28</td>
-            <td>LOT</td>
-            <td>LO755</td>
+            {/* {this.props.tasks.body.departure.map(task => {
+              console.log(task.ID);
+            })} */}
           </tr>
         </tbody>
       </table>
@@ -37,18 +38,18 @@ class FlightBoardTable extends React.Component {
   }
 }
 
-FlightBoardTable.propTypes = {
-  fetchFlightList: PropTypes.func.isRequired,
-  flites: PropTypes.arrayOf(PropTypes.shape()),
-};
+// FlightBoardTable.propTypes = {
+//   getFlightList: PropTypes.func.isRequired,
+//   flights: PropTypes.object.isRequired,
+// };
 
 const mapDispatch = {
-  fetchFlightList: flightActions.fetchFlightList,
+  getFlightList: flightActions.getFlightList,
 };
 
 const mapState = state => {
   return {
-    flites: fliteListSelector(state),
+    flights: flightSelector(state),
   };
 };
 

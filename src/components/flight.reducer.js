@@ -1,13 +1,13 @@
-import { FLIGHTS_DATA } from './tasks.actions';
+import { TASKS_LIST_RECIEVED } from './flight.actions';
 
 const initialState = {
-  flightData: [],
+  flightList: [],
 };
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FLIGHTS_DATA: {
-      return { ...state, flightData: action.payload.flightData };
+    case TASKS_LIST_RECIEVED: {
+      return { ...state, flightList: action.payload.flightList };
     }
     default:
       return state;
