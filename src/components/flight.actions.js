@@ -2,20 +2,21 @@ import * as tasksGateway from '../FlightsGateway';
 
 export const TASKS_LIST_RECIEVED = 'TASKS_LIST_RECIEVED';
 
-export const tasksListRecived = flightList => {
+export const tasksListRecived = data => {
   const action = {
     type: TASKS_LIST_RECIEVED,
     payload: {
-      flightList,
+      departure: data.body.departure,
+      arrival: data.body.arrival,
     },
   };
   return action;
 };
 
-export const getFlightList = () => {
+export const getFlightList = date => {
   const thunkAction = function (dispatch) {
-    tasksGateway.fetchTaskList().then(flightList => {
-      dispatch(tasksListRecived(flightList.body.departure));
+    tasksGateway.fetchTaskList(date).then(flightList => {
+      dispatch(tasksListRecived(flightList));
     });
   };
   return thunkAction;

@@ -1,7 +1,7 @@
-const baseUrl = 'https://api.iev.aero/api/flights/11-01-2022';
+const baseUrl = 'https://api.iev.aero/api/flights/';
 
-export const fetchTaskList = () =>
-  fetch(baseUrl).then(res => {
+export const fetchTaskList = date =>
+  fetch(baseUrl + date).then(res => {
     if (!res.ok) {
       throw new Error('Failed to fetch tasks list');
     }

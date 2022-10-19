@@ -1,24 +1,35 @@
 import React from 'react';
+import { useSearchFlightDateQuery } from '../../redux/flightDate.api';
 import FlightBoardTable from '../table/FlightBoardTable';
 import './date.scss';
 import moment from 'moment';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+// import { setFlightDate } from '../../redux/flightDateSlice';
+// import { useDispatch } from 'react-redux';
 
 const DateBorder = () => {
   let createdDate = moment(new Date()).format();
   let tomorrow = moment(createdDate).add(1, 'd');
   let yestarday = moment(createdDate).subtract(1, 'd');
-  const [calendarFormat, changeDate] = useState({
+  const [calendarFormat, setCalendarFormat] = useState({
     date: moment(new Date()).format(),
   });
 
   const { date } = calendarFormat;
 
+  // const dispatch = useDispatch();
+
+  const { isLoading, isError, data } = useSearchFlightDateQuery('12-01-2022');
+
+  useEffect(() => {
+    console.log(data ? data.body.departure : null);
+  }, [data]);
+
   const handleChangeDate = event => {
-    changeDate({ ...calendarFormat, [event.target.name]: event.target.value });
+    setCalendarFormat({ ...calendarFormat, [event.target.name]: event.target.value });
+    // dispatch(setFlightDate(calendarFormat));
   };
 
-  console.log(moment(date).format('DD/MM'));
   return (
     <div className="board__date">
       <div className="date__select">
