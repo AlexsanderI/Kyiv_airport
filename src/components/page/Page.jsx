@@ -4,6 +4,7 @@ import BoarderDeparture from '../boarderDeparture/BoarderDeparture';
 import BoarderArrivel from '../boarderArrivel/BoarderArrivel';
 import DateBorder from '../date/DateBorder';
 import SearchFlight from '../search_flight/SearchFlight';
+
 import './page.scss';
 
 const Page = () => {
