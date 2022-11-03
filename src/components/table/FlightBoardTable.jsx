@@ -36,7 +36,7 @@ const FlightBoardTable = ({ data }) => {
           <table className="styled-table">
             <thead>
               <tr className="table__title">
-                <td>Terminal</td>
+                <td>Terminal!</td>
                 <td>Local time</td>
                 <td>Destination</td>
                 <td>Status</td>
