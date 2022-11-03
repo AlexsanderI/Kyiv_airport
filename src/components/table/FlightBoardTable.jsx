@@ -21,11 +21,9 @@ const FlightBoardTable = ({ data }) => {
             <td>Flight</td>
           </tr>
         </thead>
-        <Departure data={data} />
-        {/* <Search data={data} /> */}
-        {/* <tbody>
+        <tbody>
           {data
-            ? data.body.departure.map(flightNum => (
+            ? data.map(flightNum => (
                 <tr className="table__sheduel" key={flightNum.ID}>
                   <td>
                     <div className={flightNum.term}>{flightNum.term}</div>{' '}
@@ -38,7 +36,7 @@ const FlightBoardTable = ({ data }) => {
                 </tr>
               ))
             : null}
-        </tbody> */}
+        </tbody>
       </table>
     );
   }
