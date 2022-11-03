@@ -70,7 +70,7 @@ const DateBorder = () => {
           </div>
           <div className="date__days-box tomorrow" onClick={() => handleChangeDate(tomorrow)}>
             <div className="date__days-num">{tomorrow.format('DD/MM')}</div>
-            <div className="date__days-text">Tomorrow</div>
+            <div className="date__days-text">Tomorrow1</div>
           </div>
         </div>
       </div>
