@@ -31,42 +31,6 @@ const FlightBoardTable = ({ data }) => {
   console.log(search);
   {
     return (
-<<<<<<< HEAD
-      <>
-        {searchData && searchData.length !== 0 ? (
-          <table className="styled-table">
-            <thead>
-              <tr className="table__title">
-                <td>Terminal!</td>
-                <td>Local time</td>
-                <td>Destination</td>
-                <td>Status</td>
-                <td>Airline</td>
-                <td>Flight</td>
-              </tr>
-            </thead>
-            <tbody>
-              {data
-                ? data.body.departure.map(flightNum => (
-                    <tr className="table__sheduel" key={flightNum.ID}>
-                      <td>
-                        <div className={flightNum.term}>{flightNum.term}</div>{' '}
-                      </td>
-                      <td>{moment(flightNum.timeDepExpectCalc).format('hh:mm')}</td>
-                      <td>{flightNum['airportToID.city_en']}</td>
-                      <td>Departed at {moment(flightNum.timeTakeofFact).format('hh:mm')}</td>
-                      <td>{flightNum.airline.en.name}</td>
-                      <td>{flightNum.codeShareData[0].codeShare}</td>
-                    </tr>
-                  ))
-                : null}
-            </tbody>
-          </table>
-        ) : (
-          <NoFlight />
-        )}
-      </>
-=======
       <table className="styled-table">
         <thead>
           <tr className="table__title">
@@ -95,7 +59,6 @@ const FlightBoardTable = ({ data }) => {
             : null}
         </tbody>
       </table>
->>>>>>> 4249603
     );
   }
 };
