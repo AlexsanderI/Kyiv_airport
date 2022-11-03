@@ -1,5 +1,5 @@
 import React from 'react';
-import '../table/flightBoardTable.scss';
+import '../table/flightBoardTableDeparture.scss';
 import moment from 'moment';
 
 const Search = ({ data }) => {

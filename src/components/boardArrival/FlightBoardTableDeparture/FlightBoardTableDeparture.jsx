@@ -1,9 +1,6 @@
 import React from 'react';
-import './flightBoardTable.scss';
-import { useState } from 'react';
+import './flightBoardTableDeparture.scss';
 import moment from 'moment';
-import Departure from '../departure/Departure';
-import Search from '../search/Search';
 
 const FlightBoardTable = ({ data }) => {
   // const [departure, setDeparture] = useState({ data });

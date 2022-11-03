@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSearchFlightDateQuery } from '../../redux/flightDate.api';
-import FlightBoardTable from '../table/FlightBoardTable';
+import FlightBoardTable from './FlightBoardTableDeparture/FlightBoardTableDeparture';
 import NoFlight from '../noFlight/noFlight';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import './date.scss';
 import { useSelector } from 'react-redux';
 
-const DateBorder = () => {
+const DateBorderDepartures = () => {
   let createdDate = moment(new Date()).format();
   let tomorrow = moment(createdDate).add(1, 'd');
   let yestarday = moment(createdDate).subtract(1, 'd');
@@ -83,4 +83,4 @@ const DateBorder = () => {
   );
 };
 
-export default DateBorder;
+export default DateBorderDepartures;

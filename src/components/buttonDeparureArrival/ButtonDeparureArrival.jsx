@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import './boarderDeparture.scss';
+import './buttonDeparureArrival.scss';
 
-const BoarderDeparture = () => {
+const ButtonDeparureArrival = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -10,7 +10,7 @@ const BoarderDeparture = () => {
   };
   return (
     <div className="board">
-      <div className="board__departure-arrivel">
+      <div className="board__departure-arrival">
         <button
           className={isActive ? 'board__departure-on' : 'board__departure'}
           disabled={isActive ? 'disabled' : ''}
@@ -23,11 +23,11 @@ const BoarderDeparture = () => {
           disabled={isActive ? '' : 'disabled'}
           onClick={handleClick}
         >
-          <span className="board__arrivel-icon">arrivel</span>
+          <span className="board__arrival-icon">arrival</span>
         </button>
       </div>
     </div>
   );
 };
 
-export default BoarderDeparture;
+export default ButtonDeparureArrival;

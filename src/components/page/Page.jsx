@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
-import BoarderDeparture from '../boarderDeparture/BoarderDeparture';
+import ButtonDeparureArrival from '../buttonDeparureArrival/ButtonDeparureArrival';
 
-import DateBorder from '../date/DateBorder';
+import DateBorder from '../boardDepature/DateBorderDepartures';
 import SearchFlight from '../search_flight/SearchFlight';
 
 import './page.scss';
@@ -12,8 +12,7 @@ const Page = () => {
     <div className="page">
       <SearchFlight />
       <BrowserRouter></BrowserRouter>
-      {/* <BoarderArrivel /> */}
-      <BoarderDeparture />
+      <ButtonDeparureArrival />
       <DateBorder />
     </div>
   );
