@@ -15,9 +15,9 @@ const DateBorder = () => {
   let yestarday = moment(createdDate).subtract(1, 'd');
   const [calendarFormat, setCalendarFormat] = useState(new Date());
 
-  const [searchData, setSearchData] = useState(null);
+  // const [searchData, setSearchData] = useState(null);
 
-  const search = useSelector(state => state.searchFlight.searchFlight);
+  // const search = useSelector(state => state.searchFlight.searchFlight);
 
   const dispatch = useDispatch();
 
@@ -25,18 +25,18 @@ const DateBorder = () => {
     moment(calendarFormat).format('DD-MM-YYYY'),
   );
 
-  useEffect(() => {
-    const departure = data ? data.body.departure : null;
+  // useEffect(() => {
+  //   const departure = data ? data.body.departure : null;
 
-    setSearchData(departure);
-    if (search) {
-      const searchFlight = data.body.departure.filter(
-        flight => flight.codeShareData[0].codeShare === search,
-      );
-      setSearchData(searchFlight);
-      console.log(searchFlight);
-    }
-  }, [data, search]);
+  //   setSearchData(departure);
+  //   if (search) {
+  //     const searchFlight = data.body.departure.filter(
+  //       flight => flight.codeShareData[0].codeShare === search,
+  //     );
+  //     setSearchData(searchFlight);
+  //     console.log(searchFlight);
+  //   }
+  // }, [data, search]);
 
   const handleChangeDate = day => {
     const currentDate = moment(day).format('DD-MM-YYYY');
@@ -70,15 +70,16 @@ const DateBorder = () => {
           </div>
           <div className="date__days-box tomorrow" onClick={() => handleChangeDate(tomorrow)}>
             <div className="date__days-num">{tomorrow.format('DD/MM')}</div>
-            <div className="date__days-text">Tomorrow1</div>
+            <div className="date__days-text">Tomorrow</div>
           </div>
         </div>
       </div>
-      {searchData && searchData.length !== 0 ? (
+      <FlightBoardTable data={data} />
+      {/* {searchData && searchData.length !== 0 ? (
         <FlightBoardTable data={searchData} />
       ) : (
         <NoFlight />
-      )}
+      )} */}
     </div>
   );
 };
