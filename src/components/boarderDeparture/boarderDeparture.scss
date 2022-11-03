@@ -9,7 +9,7 @@
   border-radius: 60px 0 0 0;
   // z-index: -1;
   text-align: right;
-  background: #73d2f0;
+  background: #1eb7ee;
   width: 100vw;
   font-size: 20px;
   font-weight: 700;
@@ -31,7 +31,7 @@
   cursor: pointer;
 }
 .board__departure-on {
-  border-radius: 60px 0 0 0;
+  border-radius: 60px 60px 0 0;
   margin-right: -60px;
   text-align: right;
   background-color: #fff;
@@ -41,10 +41,11 @@
   text-align: center;
   color: #1eb7ee;
   cursor: pointer;
+  z-index: 1;
 }
 
 .board__arrivel-off {
-  border-radius: 60px 60px 0 0;
+  border-radius: 0 60px 0 0;
   text-align: right;
   background-color: #1eb7ee;
   width: 100vw;
