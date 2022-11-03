@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import BoarderDeparture from '../boarderDeparture/BoarderDeparture';
-import BoarderArrivel from '../boarderArrivel/BoarderArrivel';
+
 import DateBorder from '../date/DateBorder';
 import SearchFlight from '../search_flight/SearchFlight';
 
