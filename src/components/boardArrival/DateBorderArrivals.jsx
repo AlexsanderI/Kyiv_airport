@@ -49,7 +49,12 @@ const DateBorderArrivals = () => {
     dispatch(setFlightDate(currentDate));
   };
 
-  console.log(data);
+  let showFlights = '';
+
+  if (searchData !== null) {
+    showFlights =
+      searchData.length !== 0 ? <FlightBoardTableArrivals data={searchData} /> : <NoFlight />;
+  }
   return (
     <div className="board__date">
       <div className="date__select">
@@ -79,11 +84,18 @@ const DateBorderArrivals = () => {
           </div>
         </div>
       </div>
-      {searchData && searchData.length !== 0 ? (
-        <FlightBoardTableArrivals data={searchData} />
+
+      {showFlights}
+
+      {/* {searchData !== null ? (
+        searchData.length !== 0 ? (
+          <FlightBoardTableArrivals data={searchData} />
+        ) : (
+          <NoFlight />
+        )
       ) : (
-        <NoFlight />
-      )}
+        ''
+      )} */}
     </div>
   );
 };

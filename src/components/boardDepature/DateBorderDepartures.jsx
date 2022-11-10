@@ -49,7 +49,11 @@ const DateBorderDepartures = () => {
     dispatch(setFlightDate(currentDate));
   };
 
-  console.log(data);
+  let showFlights = '';
+
+  if (searchData !== null) {
+    showFlights = searchData.length !== 0 ? <FlightBoardTable data={searchData} /> : <NoFlight />;
+  }
   return (
     <div className="board__date">
       <div className="date__select">
@@ -79,11 +83,21 @@ const DateBorderDepartures = () => {
           </div>
         </div>
       </div>
-      {searchData && searchData.length !== 0 ? (
+      {showFlights}
+      {/* {(searchData !== null )? (
+        searchData.length !== 0 ? (
+          <DateBorderDepartures data={searchData} />
+        ) : (
+          <NoFlight />
+        )
+      ) : (
+        ''
+      )} */}
+      {/* {searchData && searchData.length !== 0 ? (
         <FlightBoardTable data={searchData} />
       ) : (
         <NoFlight />
-      )}
+      )} */}
     </div>
   );
 };
