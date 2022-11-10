@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSearchFlightDateQuery } from '../../redux/flightDate.api';
-import FlightBoardTable from './FlightBoardTableDeparture/FlightBoardTableDeparture';
+import FlightBoardTableArrivals from './FlightBoardTableArrivals/FlightBoardTableArrivals';
 import NoFlight from '../noFlight/noFlight';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import './date.scss';
 import { useSelector } from 'react-redux';
 
-const DateBorderDepartures = () => {
+const DateBorderArrivals = () => {
   let createdDate = moment(new Date()).format();
   let tomorrow = moment(createdDate).add(1, 'd');
   let yestarday = moment(createdDate).subtract(1, 'd');
@@ -26,11 +26,11 @@ const DateBorderDepartures = () => {
   );
 
   useEffect(() => {
-    const departure = data ? data.body.departure : null;
+    const arrival = data ? data.body.arrival : null;
 
-    setSearchData(departure);
+    setSearchData(arrival);
     if (search) {
-      const searchFlight = data.body.departure.filter(
+      const searchFlight = data.body.arrival.filter(
         flight => flight.codeShareData[0].codeShare === search,
       );
       setSearchData(searchFlight);
@@ -75,7 +75,7 @@ const DateBorderDepartures = () => {
         </div>
       </div>
       {searchData && searchData.length !== 0 ? (
-        <FlightBoardTable data={searchData} />
+        <FlightBoardTableArrivals data={searchData} />
       ) : (
         <NoFlight />
       )}
@@ -83,4 +83,4 @@ const DateBorderDepartures = () => {
   );
 };
 
-export default DateBorderDepartures;
+export default DateBorderArrivals;

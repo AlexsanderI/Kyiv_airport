@@ -1,8 +1,8 @@
 import React from 'react';
-import './flightBoardTableDeparture.scss';
+import './flightBoardTableArrivals.scss';
 import moment from 'moment';
 
-const FlightBoardTable = ({ data }) => {
+const FlightBoardTableArrivals = ({ data }) => {
   // const [departure, setDeparture] = useState({ data });
   console.log(data);
   {
@@ -39,4 +39,4 @@ const FlightBoardTable = ({ data }) => {
   }
 };
 
-export default FlightBoardTable;
+export default FlightBoardTableArrivals;
