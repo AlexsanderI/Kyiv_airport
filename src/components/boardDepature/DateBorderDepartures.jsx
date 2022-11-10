@@ -13,7 +13,10 @@ const DateBorderDepartures = () => {
   let createdDate = moment(new Date()).format();
   let tomorrow = moment(createdDate).add(1, 'd');
   let yestarday = moment(createdDate).subtract(1, 'd');
-  const [calendarFormat, setCalendarFormat] = useState(new Date());
+
+  const saveData = useSelector(state => state.flightDate.flightDate);
+
+  const [calendarFormat, setCalendarFormat] = useState(saveData ? saveData : new Date());
 
   const [searchData, setSearchData] = useState(null);
 
@@ -26,6 +29,8 @@ const DateBorderDepartures = () => {
   );
 
   useEffect(() => {
+    setCalendarFormat(moment(saveData).format('DD-MM-YYYY'));
+
     const departure = data ? data.body.departure : null;
 
     setSearchData(departure);
