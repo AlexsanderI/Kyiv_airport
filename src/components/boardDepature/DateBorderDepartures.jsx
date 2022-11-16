@@ -14,22 +14,23 @@ const DateBorderDepartures = () => {
   let tomorrow = moment(createdDate).add(1, 'd');
   let yestarday = moment(createdDate).subtract(1, 'd');
 
-  const saveData = useSelector(state => state.flightDate.flightDate);
+  let saveDate = useSelector(state => state.flightDate.flightDate);
+  // saveDate = moment(saveDate).format('DD-MM-YYYY');
+  const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : createdDate);
 
-  const [calendarFormat, setCalendarFormat] = useState(saveData ? saveData : new Date());
-
+  console.log(calendarFormat);
   const [searchData, setSearchData] = useState(null);
+  console.log(searchData);
 
   const search = useSelector(state => state.searchFlight.searchFlight);
 
   const dispatch = useDispatch();
 
-  const { isLoading, isError, data } = useSearchFlightDateQuery(
-    moment(calendarFormat).format('DD-MM-YYYY'),
-  );
+  const { isLoading, isError, data } = useSearchFlightDateQuery(calendarFormat);
 
   useEffect(() => {
-    setCalendarFormat(moment(saveData).format('DD-MM-YYYY'));
+    setCalendarFormat(saveDate);
+    console.log(data);
 
     const departure = data ? data.body.departure : null;
 
@@ -39,21 +40,25 @@ const DateBorderDepartures = () => {
         flight => flight.codeShareData[0].codeShare === search,
       );
       setSearchData(searchFlight);
-      console.log(searchFlight);
     }
   }, [data, search]);
 
   const handleChangeDate = day => {
     const currentDate = moment(day).format('DD-MM-YYYY');
-    setCalendarFormat(day);
+    setCalendarFormat(currentDate);
     dispatch(setFlightDate(currentDate));
   };
 
   let showFlights = '';
 
-  if (searchData !== null) {
+  if (searchData) {
     showFlights = searchData.length !== 0 ? <FlightBoardTable data={searchData} /> : <NoFlight />;
   }
+
+  if (!searchData) return null;
+
+  console.log(1111111);
+
   return (
     <div className="board__date">
       <div className="date__select">
@@ -65,7 +70,9 @@ const DateBorderDepartures = () => {
           value={calendarFormat}
         ></input>
         <div className="date__icon">
-          <div className="date__icon-text">{moment(calendarFormat).format('DD/MM')}</div>
+          <div className="date__icon-text">
+            {[calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/')}
+          </div>
           <div className="date__icon-png"></div>
         </div>
         <div className="date__days">
@@ -83,16 +90,16 @@ const DateBorderDepartures = () => {
           </div>
         </div>
       </div>
-      {showFlights}
-      {/* {(searchData !== null )? (
+      {/* {showFlights} */}
+      {searchData !== null ? (
         searchData.length !== 0 ? (
-          <DateBorderDepartures data={searchData} />
+          <FlightBoardTable data={searchData} />
         ) : (
           <NoFlight />
         )
       ) : (
         ''
-      )} */}
+      )}
       {/* {searchData && searchData.length !== 0 ? (
         <FlightBoardTable data={searchData} />
       ) : (

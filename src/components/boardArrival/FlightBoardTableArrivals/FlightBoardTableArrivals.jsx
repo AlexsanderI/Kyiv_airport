@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const FlightBoardTableArrivals = ({ data }) => {
   // const [departure, setDeparture] = useState({ data });
-  console.log(data);
+
   {
     return (
       <table className="styled-table">
@@ -28,7 +28,16 @@ const FlightBoardTableArrivals = ({ data }) => {
                   <td>{moment(flightNum.timeDepExpectCalc).format('hh:mm')}</td>
                   <td>{flightNum['airportToID.city_en']}</td>
                   <td>Departed at {moment(flightNum.timeTakeofFact).format('hh:mm')}</td>
-                  <td>{flightNum.airline.en.name}</td>
+                  <td>
+                    <div className="logo">
+                      <img
+                        className="logo-image"
+                        src={`https://api.iev.aero/${flightNum.logo}`}
+                        alt="logo airline"
+                      />
+                      <div className="logo-name">{flightNum.airline.en.name}</div>
+                    </div>
+                  </td>
                   <td>{flightNum.codeShareData[0].codeShare}</td>
                 </tr>
               ))

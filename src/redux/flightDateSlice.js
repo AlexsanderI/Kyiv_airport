@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 
 const initialState = {
-  flightDate: moment(new Date()).format('DD/MM'),
+  flightDate: moment(new Date()).format('DD-MM-YYYY'),
 };
 
 export const flightDateSlice = createSlice({

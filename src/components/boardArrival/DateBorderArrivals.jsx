@@ -12,24 +12,23 @@ import { useSelector } from 'react-redux';
 const DateBorderArrivals = () => {
   let createdDate = moment(new Date()).format();
   let tomorrow = moment(createdDate).add(1, 'd');
+
   let yestarday = moment(createdDate).subtract(1, 'd');
 
-  const saveDate = useSelector(state => state.flightDate.flightDate);
-
-  const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : new Date());
+  let saveDate = useSelector(state => state.flightDate.flightDate);
+  // saveDate = moment(saveDate).format('DD-MM-YYYY');
+  const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : createdDate);
 
   const [searchData, setSearchData] = useState(null);
 
   const search = useSelector(state => state.searchFlight.searchFlight);
 
   const dispatch = useDispatch();
-
-  const { isLoading, isError, data } = useSearchFlightDateQuery(
-    moment(calendarFormat).format('DD-MM-YYYY'),
-  );
+  console.log(calendarFormat);
+  const { isLoading, isError, data } = useSearchFlightDateQuery(calendarFormat);
 
   useEffect(() => {
-    setCalendarFormat(moment(saveDate).format('DD-MM-YYYY'));
+    setCalendarFormat(saveDate);
 
     const arrival = data ? data.body.arrival : null;
 
@@ -39,22 +38,28 @@ const DateBorderArrivals = () => {
         flight => flight.codeShareData[0].codeShare === search,
       );
       setSearchData(searchFlight);
-      console.log(searchFlight);
     }
   }, [data, search]);
 
   const handleChangeDate = day => {
     const currentDate = moment(day).format('DD-MM-YYYY');
-    setCalendarFormat(day);
+    setCalendarFormat(currentDate);
     dispatch(setFlightDate(currentDate));
   };
 
   let showFlights = '';
 
-  if (searchData !== null) {
+  if (searchData) {
     showFlights =
       searchData.length !== 0 ? <FlightBoardTableArrivals data={searchData} /> : <NoFlight />;
   }
+
+  console.log(
+    'calendarFormat',
+    [calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/'),
+  );
+  console.log('saveDate', saveDate);
+
   return (
     <div className="board__date">
       <div className="date__select">
@@ -66,7 +71,12 @@ const DateBorderArrivals = () => {
           value={calendarFormat}
         ></input>
         <div className="date__icon">
-          <div className="date__icon-text">{moment(calendarFormat).format('DD/MM')}</div>
+          <div className="date__icon-text">
+            {
+              // moment(data).format('DD/MM')
+              [calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/')
+            }
+          </div>
           <div className="date__icon-png"></div>
         </div>
         <div className="date__days">
@@ -85,9 +95,9 @@ const DateBorderArrivals = () => {
         </div>
       </div>
 
-      {showFlights}
+      {/* {showFlights} */}
 
-      {/* {searchData !== null ? (
+      {searchData !== null ? (
         searchData.length !== 0 ? (
           <FlightBoardTableArrivals data={searchData} />
         ) : (
@@ -95,7 +105,7 @@ const DateBorderArrivals = () => {
         )
       ) : (
         ''
-      )} */}
+      )}
     </div>
   );
 };

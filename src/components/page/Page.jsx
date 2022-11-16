@@ -13,12 +13,11 @@ const Page = () => {
       <SearchFlight />
       <BrowserRouter>
         <ButtonDeparureArrival />
-
         <Route exact path="/departure">
-          <DateBorderArrivals />
+          <DateBorderDepartures />
         </Route>
         <Route path="/arrival">
-          <DateBorderDepartures />
+          <DateBorderArrivals />
         </Route>
       </BrowserRouter>
     </div>
