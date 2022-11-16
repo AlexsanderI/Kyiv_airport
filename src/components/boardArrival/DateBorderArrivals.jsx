@@ -14,6 +14,8 @@ const DateBorderArrivals = () => {
   let tomorrow = moment(createdDate).add(1, 'd');
   let yestarday = moment(createdDate).subtract(1, 'd');
 
+  console.log('Good job');
+
   const saveDate = useSelector(state => state.flightDate.flightDate);
 
   const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : new Date());
