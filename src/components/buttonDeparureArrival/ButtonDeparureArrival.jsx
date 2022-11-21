@@ -5,31 +5,35 @@ import './buttonDeparureArrival.scss';
 
 const ButtonDeparureArrival = () => {
   const [isActive, setIsActive] = useState(false);
-  let history = useHistory();
+  let departure = useHistory();
+  let arrival = useHistory();
 
-  const handleClick = () => {
+  const handleClickDeparture = () => {
     setIsActive(!isActive);
-    history.push('/departure');
+    departure.push('/departure');
+  };
+  const handleClickArrivel = () => {
+    setIsActive(!isActive);
+
+    arrival.push('/arrival');
   };
   return (
     <div className="board">
       <div className="board__departure-arrival">
         <button
-          // to="/departure"
           className={isActive ? 'board__departure-on' : 'board__departure'}
           disabled={isActive ? 'disabled' : ''}
-          onClick={handleClick}
+          onClick={handleClickDeparture}
         >
           <span className="board__departure-icon">departure</span>
         </button>
-        <Link
-          to="/arrival"
+        <button
           className={isActive ? 'board__arrivel-off' : 'board__arrivel'}
           disabled={isActive ? '' : 'disabled'}
-          onClick={handleClick}
+          onClick={handleClickArrivel}
         >
           <span className="board__arrival-icon">arrival</span>
-        </Link>
+        </button>
       </div>
     </div>
   );
