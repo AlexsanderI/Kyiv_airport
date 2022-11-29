@@ -33,10 +33,9 @@ const FlightBoardTable = ({ data }) => {
                       <img
                         className="logo-image"
                         src={
-                          `https://api.iev.aero/${flightNum.logo}` ===
-                          'https://api.iev.aero/undefined'
-                            ? flightNum.airline.en.logoSmallName
-                            : `https://api.iev.aero/${flightNum.logo}`
+                          `https://api.iev.aero/${flightNum.logo}` === undefined
+                            ? `https://api.iev.aero/${flightNum.logo}`
+                            : flightNum.airline.en.logoSmallName
                         }
                         alt="logo airline"
                       />

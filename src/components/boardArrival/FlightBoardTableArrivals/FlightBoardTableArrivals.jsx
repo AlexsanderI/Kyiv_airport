@@ -25,8 +25,8 @@ const FlightBoardTableArrivals = ({ data }) => {
                   <td>
                     <div className={flightNum.term}>{flightNum.term}</div>{' '}
                   </td>
-                  <td>{moment(flightNum.timeDepExpectCalc).format('hh:mm')}</td>
-                  <td>{flightNum['airportToID.city_en']}</td>
+                  <td>{moment(flightNum.timeArrExpectCalc).format('hh:mm')}</td>
+                  <td>{flightNum['airportFromID.name_en']}</td>
                   <td>Departed at {moment(flightNum.timeTakeofFact).format('hh:mm')}</td>
                   <td>
                     <div className="logo">
