@@ -16,7 +16,7 @@ const DateBorderArrivals = () => {
   let yestarday = moment(createdDate).subtract(1, 'd');
 
   let saveDate = useSelector(state => state.flightDate.flightDate);
-  // saveDate = moment(saveDate).format('DD-MM-YYYY');
+
   const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : createdDate);
 
   const [searchData, setSearchData] = useState(null);
@@ -24,19 +24,24 @@ const DateBorderArrivals = () => {
   const search = useSelector(state => state.searchFlight.searchFlight);
 
   const dispatch = useDispatch();
-  console.log(calendarFormat);
+
   const { isLoading, isError, data } = useSearchFlightDateQuery(calendarFormat);
 
   useEffect(() => {
     setCalendarFormat(saveDate);
 
-    const arrival = data ? data.body.arrival : null;
+    const arrival = data
+      ? data.body.arrival
+          .filter(el => moment(el.timeToStand).format('DD-MM-YYYY') === calendarFormat)
+
+          .sort((a, b) => new Date(a.timeToStand) - new Date(b.timeToStand))
+      : null;
 
     setSearchData(arrival);
     if (search) {
-      const searchFlight = data.body.arrival.filter(
-        flight => flight.codeShareData[0].codeShare === search,
-      );
+      const searchFlight = data.body.arrival
+        .filter(el => moment(el.timeToStand).format('DD-MM-YYYY') === calendarFormat)
+        .filter(flight => flight.codeShareData[0].codeShare === search);
       setSearchData(searchFlight);
     }
   }, [data, search]);
@@ -47,18 +52,17 @@ const DateBorderArrivals = () => {
     dispatch(setFlightDate(currentDate));
   };
 
-  let showFlights = '';
+  // let showFlights = '';
 
-  if (searchData) {
-    showFlights =
-      searchData.length !== 0 ? <FlightBoardTableArrivals data={searchData} /> : <NoFlight />;
-  }
+  // if (searchData) {
+  //   showFlights =
+  //     searchData.length !== 0 ? <FlightBoardTableArrivals data={searchData} /> : <NoFlight />;
+  // }
 
-  console.log(
-    'calendarFormat',
-    [calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/'),
-  );
-  console.log('saveDate', saveDate);
+  // console.log(
+  //   'calendarFormat',
+  //   [calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/'),
+  // );
 
   return (
     <div className="board__date">

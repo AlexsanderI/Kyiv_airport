@@ -25,9 +25,9 @@ const FlightBoardTable = ({ data }) => {
                   <td>
                     <div className={flightNum.term}>{flightNum.term}</div>{' '}
                   </td>
-                  <td>{moment(flightNum.timeDepExpectCalc).format('hh:mm')}</td>
+                  <td>{moment(flightNum.timeDepShedule).format('HH:mm')}</td>
                   <td>{flightNum['airportToID.city_en']}</td>
-                  <td>Departed at {moment(flightNum.timeTakeofFact).format('hh:mm')}</td>
+                  <td>Departed at {moment(flightNum.timeTakeofFact).format('HH:mm')}</td>
                   <td>
                     <div className="logo">
                       <img

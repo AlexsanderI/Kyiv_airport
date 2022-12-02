@@ -15,12 +15,10 @@ const DateBorderDepartures = () => {
   let yestarday = moment(createdDate).subtract(1, 'd');
 
   let saveDate = useSelector(state => state.flightDate.flightDate);
-  // saveDate = moment(saveDate).format('DD-MM-YYYY');
+
   const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : createdDate);
 
-  console.log(calendarFormat);
   const [searchData, setSearchData] = useState(null);
-  console.log(searchData);
 
   const search = useSelector(state => state.searchFlight.searchFlight);
 
@@ -32,13 +30,18 @@ const DateBorderDepartures = () => {
     setCalendarFormat(saveDate);
     console.log(data);
 
-    const departure = data ? data.body.departure : null;
+    const departure = data
+      ? data.body.departure
+          .filter(el => moment(el.timeDepShedule).format('DD-MM-YYYY') === calendarFormat)
+
+          .sort((a, b) => new Date(a.timeDepShedule) - new Date(b.timeDepShedule))
+      : null;
 
     setSearchData(departure);
     if (search) {
-      const searchFlight = data.body.departure.filter(
-        flight => flight.codeShareData[0].codeShare === search,
-      );
+      const searchFlight = data.body.departure
+        .filter(el => moment(el.timeDepShedule).format('DD-MM-YYYY') === calendarFormat)
+        .filter(flight => flight.codeShareData[0].codeShare === search);
       setSearchData(searchFlight);
     }
   }, [data, search]);
