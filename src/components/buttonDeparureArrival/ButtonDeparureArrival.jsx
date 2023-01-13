@@ -25,14 +25,16 @@ const ButtonDeparureArrival = () => {
           disabled={isActive ? 'disabled' : ''}
           onClick={handleClickDeparture}
         >
-          <span className="board__departure-icon">departure</span>
+          {/* <div></div> */}
+          <div className="board__departure-icon"></div>
+          departure
         </button>
         <button
           className={isActive ? 'board__arrivel-off' : 'board__arrivel'}
           disabled={isActive ? '' : 'disabled'}
           onClick={handleClickArrivel}
         >
-          <span className="board__arrival-icon">arrival</span>
+          <div className="board__arrival-icon">arrival</div>
         </button>
       </div>
     </div>

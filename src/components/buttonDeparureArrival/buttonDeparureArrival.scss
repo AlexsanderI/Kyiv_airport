@@ -5,6 +5,7 @@
   width: 1120px;
   margin: auto;
 }
+
 .board__departure {
   border-radius: 60px 0 0 0;
   // z-index: -1;
@@ -16,6 +17,7 @@
   text-align: center;
   color: #fff;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .board__arrivel {
@@ -29,6 +31,7 @@
   text-align: center;
   color: #1eb7ee;
   cursor: pointer;
+  text-transform: uppercase;
 }
 .board__departure-on {
   border-radius: 60px 60px 0 0;
@@ -42,6 +45,7 @@
   color: #1eb7ee;
   cursor: pointer;
   z-index: 1;
+  text-transform: uppercase;
 }
 
 .board__arrivel-off {
@@ -53,11 +57,15 @@
   font-weight: 700;
   text-align: center;
   color: #fff;
-
+  text-transform: uppercase;
   cursor: pointer;
 }
 
-a {
-  text-transform: uppercase;
-  text-decoration: none;
+// a {
+//   text-transform: uppercase;
+//   text-decoration: none;
+// }
+
+.board__departure-icon {
+  background-image: url('../icon/blue_plane.png');
 }

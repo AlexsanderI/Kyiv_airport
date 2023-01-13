@@ -3,8 +3,6 @@ import './flightBoardTableDeparture.scss';
 import moment from 'moment';
 
 const FlightBoardTable = ({ data }) => {
-  // const [departure, setDeparture] = useState({ data });
-
   {
     return (
       <table className="styled-table">
