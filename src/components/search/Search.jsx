@@ -1,9 +1,8 @@
 import React from 'react';
-import '../table/flightBoardTable.scss';
+import '../table/flightBoardTableDeparture.scss';
 import moment from 'moment';
 
 const Search = ({ data }) => {
-  // const [departure, setDeparture] = useState({ data });
   console.log(data);
   {
     return (

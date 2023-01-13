@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD:src/components/table/FlightBoardTable.jsx
 import './flightBoardTable.scss';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
@@ -29,6 +30,12 @@ const FlightBoardTable = ({ data }) => {
   }, [data, search]);
 
   console.log(search);
+=======
+import './flightBoardTableDeparture.scss';
+import moment from 'moment';
+
+const FlightBoardTable = ({ data }) => {
+>>>>>>> 21ebaa1:src/components/boardDepature/FlightBoardTableDeparture/FlightBoardTableDeparture.jsx
   {
     return (
       <table className="styled-table">
@@ -49,10 +56,23 @@ const FlightBoardTable = ({ data }) => {
                   <td>
                     <div className={flightNum.term}>{flightNum.term}</div>{' '}
                   </td>
-                  <td>{moment(flightNum.timeDepExpectCalc).format('hh:mm')}</td>
+                  <td>{moment(flightNum.timeDepShedule).format('HH:mm')}</td>
                   <td>{flightNum['airportToID.city_en']}</td>
-                  <td>Departed at {moment(flightNum.timeTakeofFact).format('hh:mm')}</td>
-                  <td>{flightNum.airline.en.name}</td>
+                  <td>Departed at {moment(flightNum.timeTakeofFact).format('HH:mm')}</td>
+                  <td>
+                    <div className="logo">
+                      <img
+                        className="logo-image"
+                        src={
+                          `https://api.iev.aero/${flightNum.logo}` === undefined
+                            ? `https://api.iev.aero/${flightNum.logo}`
+                            : flightNum.airline.en.logoSmallName
+                        }
+                        alt="logo airline"
+                      />
+                      <div className="logo-name">{flightNum.airline.en.name}</div>
+                    </div>
+                  </td>
                   <td>{flightNum.codeShareData[0].codeShare}</td>
                 </tr>
               ))

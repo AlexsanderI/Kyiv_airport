@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSearchFlightDateQuery } from '../../redux/flightDate.api';
-import FlightBoardTable from '../table/FlightBoardTable';
+import FlightBoardTableArrivals from './FlightBoardTableArrivals/FlightBoardTableArrivals';
 import NoFlight from '../noFlight/noFlight';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
@@ -9,42 +9,61 @@ import { useDispatch } from 'react-redux';
 import './date.scss';
 import { useSelector } from 'react-redux';
 
-const DateBorder = () => {
+const DateBorderArrivals = () => {
   let createdDate = moment(new Date()).format();
   let tomorrow = moment(createdDate).add(1, 'd');
+
   let yestarday = moment(createdDate).subtract(1, 'd');
-  const [calendarFormat, setCalendarFormat] = useState(new Date());
 
-  // const [searchData, setSearchData] = useState(null);
+  let saveDate = useSelector(state => state.flightDate.flightDate);
 
-  // const search = useSelector(state => state.searchFlight.searchFlight);
+  const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : createdDate);
+
+  const [searchData, setSearchData] = useState(null);
+
+  const search = useSelector(state => state.searchFlight.searchFlight);
 
   const dispatch = useDispatch();
 
-  const { isLoading, isError, data } = useSearchFlightDateQuery(
-    moment(calendarFormat).format('DD-MM-YYYY'),
-  );
+  const { isLoading, isError, data } = useSearchFlightDateQuery(calendarFormat);
 
-  // useEffect(() => {
-  //   const departure = data ? data.body.departure : null;
+  useEffect(() => {
+    setCalendarFormat(saveDate);
 
-  //   setSearchData(departure);
-  //   if (search) {
-  //     const searchFlight = data.body.departure.filter(
-  //       flight => flight.codeShareData[0].codeShare === search,
-  //     );
-  //     setSearchData(searchFlight);
-  //     console.log(searchFlight);
-  //   }
-  // }, [data, search]);
+    const arrival = data
+      ? data.body.arrival
+          .filter(el => moment(el.timeToStand).format('DD-MM-YYYY') === calendarFormat)
+
+          .sort((a, b) => new Date(a.timeToStand) - new Date(b.timeToStand))
+      : null;
+
+    setSearchData(arrival);
+    if (search) {
+      const searchFlight = data.body.arrival
+        .filter(el => moment(el.timeToStand).format('DD-MM-YYYY') === calendarFormat)
+        .filter(flight => flight.codeShareData[0].codeShare === search);
+      setSearchData(searchFlight);
+    }
+  }, [data, search]);
 
   const handleChangeDate = day => {
     const currentDate = moment(day).format('DD-MM-YYYY');
-    setCalendarFormat(day);
+    setCalendarFormat(currentDate);
     dispatch(setFlightDate(currentDate));
   };
 
-  console.log(data);
+  // let showFlights = '';
+
+  // if (searchData) {
+  //   showFlights =
+  //     searchData.length !== 0 ? <FlightBoardTableArrivals data={searchData} /> : <NoFlight />;
+  // }
+
+  // console.log(
+  //   'calendarFormat',
+  //   [calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/'),
+  // );
+
   return (
     <div className="board__date">
       <div className="date__select">
@@ -56,7 +75,12 @@ const DateBorder = () => {
           value={calendarFormat}
         ></input>
         <div className="date__icon">
-          <div className="date__icon-text">{moment(calendarFormat).format('DD/MM')}</div>
+          <div className="date__icon-text">
+            {
+              // moment(data).format('DD/MM')
+              [calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/')
+            }
+          </div>
           <div className="date__icon-png"></div>
         </div>
         <div className="date__days">
@@ -74,14 +98,20 @@ const DateBorder = () => {
           </div>
         </div>
       </div>
-      <FlightBoardTable data={data} />
-      {/* {searchData && searchData.length !== 0 ? (
-        <FlightBoardTable data={searchData} />
+
+      {/* {showFlights} */}
+
+      {searchData !== null ? (
+        searchData.length !== 0 ? (
+          <FlightBoardTableArrivals data={searchData} />
+        ) : (
+          <NoFlight />
+        )
       ) : (
-        <NoFlight />
-      )} */}
+        ''
+      )}
     </div>
   );
 };
 
-export default DateBorder;
+export default DateBorderArrivals;
