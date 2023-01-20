@@ -1,12 +1,17 @@
 import React from 'react';
-import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './buttonDeparureArrival.scss';
 
 const ButtonDeparureArrival = () => {
   const [isActive, setIsActive] = useState(false);
+  const history = useHistory();
   let departure = useHistory();
   let arrival = useHistory();
+
+  useEffect(() => {
+    history.push('/departure');
+  }, []);
 
   const handleClickDeparture = () => {
     setIsActive(!isActive);

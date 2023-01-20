@@ -13,9 +13,9 @@ const DateBorderArrivals = () => {
   let createdDate = moment(new Date()).format();
 
   let today = moment(createdDate).format('DD/MM');
-  let tomorrow = moment(createdDate).add(1, 'd').format('DD/MM');
+  let tomorrow = moment(createdDate).add(1, 'd');
 
-  let yestarday = moment(createdDate).subtract(1, 'd').format('DD/MM');
+  let yestarday = moment(createdDate).subtract(1, 'd');
 
   let saveDate = useSelector(state => state.flightDate.flightDate);
 
@@ -23,6 +23,10 @@ const DateBorderArrivals = () => {
 
   const handleClick = buttonId => {
     setActiveButton(buttonId);
+  };
+
+  const reset = () => {
+    setActiveButton(null);
   };
 
   const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : createdDate);
@@ -71,7 +75,10 @@ const DateBorderArrivals = () => {
           type="date"
           name="date"
           className="date__form"
-          onChange={event => handleChangeDate(event.target.value)}
+          onChange={event => {
+            handleChangeDate(event.target.value);
+            reset();
+          }}
           value={calendarFormat}
         ></input>
         <div className="date__icon">
@@ -85,16 +92,13 @@ const DateBorderArrivals = () => {
         </div>
         <div className="date__days">
           <div
-            className={`date__days-box ${activeButton === yestarday ? 'active' : ''}`}
-            onClick={
-              () => {
-                handleChangeDate(yestarday);
-                handleClick(yestarday);
-              }
-              // try use only handleClick
-            }
+            className={`date__days-box ${activeButton === 'yestarday' ? 'active' : ''}`}
+            onClick={() => {
+              handleChangeDate(yestarday);
+              handleClick('yestarday');
+            }}
           >
-            <div className="date__days-num">{yestarday}</div>
+            <div className="date__days-num">{yestarday.format('DD/MM')}</div>
             <div className="date__days-text">Yestarday</div>
           </div>
           <div
@@ -104,7 +108,7 @@ const DateBorderArrivals = () => {
               handleClick('today');
             }}
           >
-            <div className="date__days-num">{today}</div>
+            <div className="date__days-num">{moment(new Date()).format('DD/MM')}</div>
             <div className="date__days-text">Today</div>
           </div>
           <div
@@ -114,7 +118,7 @@ const DateBorderArrivals = () => {
               handleClick('tomorrow');
             }}
           >
-            <div className="date__days-num">{tomorrow}</div>
+            <div className="date__days-num">{tomorrow.format('DD/MM')}</div>
             <div className="date__days-text">Tomorrow</div>
           </div>
         </div>
