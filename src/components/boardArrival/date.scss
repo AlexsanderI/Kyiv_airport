@@ -57,9 +57,17 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .date__days-box {
+  color: #b8b9b9;
   width: 100px;
   padding-bottom: 5px;
   border-bottom: 3px solid #d0d0d0;
+}
+
+.date__days-box.active {
+  color: #1eb7ee;
+  width: 100px;
+  padding-bottom: 5px;
+  border-bottom: 3px solid #1eb7ee;
 }
 
 .date__days {
@@ -72,7 +80,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   margin-bottom: 5px;
   cursor: pointer;
   text-align: center;
-  color: #b8b9b9;
 }
 
 .date__days-text {
@@ -80,5 +87,4 @@ input[type='date']::-webkit-calendar-picker-indicator {
   text-transform: uppercase;
   cursor: pointer;
   text-align: center;
-  color: #b8b9b9;
 }
