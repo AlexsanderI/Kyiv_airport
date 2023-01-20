@@ -28,7 +28,7 @@ const DateBorderDepartures = () => {
 
   useEffect(() => {
     setCalendarFormat(saveDate);
-    console.log(data);
+    // console.log(data);
 
     const departure = data
       ? data.body.departure
@@ -60,7 +60,7 @@ const DateBorderDepartures = () => {
 
   if (!searchData) return null;
 
-  console.log(1111111);
+  // console.log(1111111);
 
   return (
     <div className="board__date">

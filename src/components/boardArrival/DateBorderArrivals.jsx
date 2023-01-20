@@ -11,11 +11,19 @@ import { useSelector } from 'react-redux';
 
 const DateBorderArrivals = () => {
   let createdDate = moment(new Date()).format();
-  let tomorrow = moment(createdDate).add(1, 'd');
 
-  let yestarday = moment(createdDate).subtract(1, 'd');
+  let today = moment(createdDate).format('DD/MM');
+  let tomorrow = moment(createdDate).add(1, 'd').format('DD/MM');
+
+  let yestarday = moment(createdDate).subtract(1, 'd').format('DD/MM');
 
   let saveDate = useSelector(state => state.flightDate.flightDate);
+
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleClick = buttonId => {
+    setActiveButton(buttonId);
+  };
 
   const [calendarFormat, setCalendarFormat] = useState(saveDate ? saveDate : createdDate);
 
@@ -52,17 +60,9 @@ const DateBorderArrivals = () => {
     dispatch(setFlightDate(currentDate));
   };
 
-  // let showFlights = '';
+  console.log(calendarFormat);
 
-  // if (searchData) {
-  //   showFlights =
-  //     searchData.length !== 0 ? <FlightBoardTableArrivals data={searchData} /> : <NoFlight />;
-  // }
-
-  // console.log(
-  //   'calendarFormat',
-  //   [calendarFormat.split('-')[0], calendarFormat.split('-')[1]].join('/'),
-  // );
+  console.log(yestarday);
 
   return (
     <div className="board__date">
@@ -84,16 +84,37 @@ const DateBorderArrivals = () => {
           <div className="date__icon-png"></div>
         </div>
         <div className="date__days">
-          <div className="date__days-box yestarday" onClick={() => handleChangeDate(yestarday)}>
-            <div className="date__days-num">{yestarday.format('DD/MM')}</div>
+          <div
+            className={`date__days-box ${activeButton === yestarday ? 'active' : ''}`}
+            onClick={
+              () => {
+                handleChangeDate(yestarday);
+                handleClick(yestarday);
+              }
+              // try use only handleClick
+            }
+          >
+            <div className="date__days-num">{yestarday}</div>
             <div className="date__days-text">Yestarday</div>
           </div>
-          <div className="date__days-box today" onClick={() => handleChangeDate(createdDate)}>
-            <div className="date__days-num">{moment(new Date()).format('DD/MM')}</div>
+          <div
+            className={`date__days-box ${activeButton === 'today' ? 'active' : ''}`}
+            onClick={() => {
+              handleChangeDate(createdDate);
+              handleClick('today');
+            }}
+          >
+            <div className="date__days-num">{today}</div>
             <div className="date__days-text">Today</div>
           </div>
-          <div className="date__days-box tomorrow" onClick={() => handleChangeDate(tomorrow)}>
-            <div className="date__days-num">{tomorrow.format('DD/MM')}</div>
+          <div
+            className={`date__days-box ${activeButton === 'tomorrow' ? 'active' : ''}`}
+            onClick={() => {
+              handleChangeDate(tomorrow);
+              handleClick('tomorrow');
+            }}
+          >
+            <div className="date__days-num">{tomorrow}</div>
             <div className="date__days-text">Tomorrow</div>
           </div>
         </div>
